@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.AccountLogMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.AccountLog" >
+    <constructor >
+      <idArg column="log_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_money" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="frozen_money" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="rank_points" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pay_points" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="change_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="change_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="change_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    log_id, user_id, user_money, frozen_money, rank_points, pay_points, change_time, 
+    change_desc, change_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.AccountLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from account_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from account_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from account_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.AccountLogExample" >
+    delete from account_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.AccountLog" >
+    insert into account_log (log_id, user_id, user_money, 
+      frozen_money, rank_points, pay_points, 
+      change_time, change_desc, change_type
+      )
+    values (#{logId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userMoney,jdbcType=DECIMAL}, 
+      #{frozenMoney,jdbcType=DECIMAL}, #{rankPoints,jdbcType=INTEGER}, #{payPoints,jdbcType=INTEGER}, 
+      #{changeTime,jdbcType=INTEGER}, #{changeDesc,jdbcType=VARCHAR}, #{changeType,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.AccountLog" >
+    insert into account_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userMoney != null" >
+        user_money,
+      </if>
+      <if test="frozenMoney != null" >
+        frozen_money,
+      </if>
+      <if test="rankPoints != null" >
+        rank_points,
+      </if>
+      <if test="payPoints != null" >
+        pay_points,
+      </if>
+      <if test="changeTime != null" >
+        change_time,
+      </if>
+      <if test="changeDesc != null" >
+        change_desc,
+      </if>
+      <if test="changeType != null" >
+        change_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userMoney != null" >
+        #{userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenMoney != null" >
+        #{frozenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="rankPoints != null" >
+        #{rankPoints,jdbcType=INTEGER},
+      </if>
+      <if test="payPoints != null" >
+        #{payPoints,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=INTEGER},
+      </if>
+      <if test="changeDesc != null" >
+        #{changeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null" >
+        #{changeType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.AccountLogExample" resultType="java.lang.Integer" >
+    select count(*) from account_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update account_log
+    <set >
+      <if test="record.logId != null" >
+        log_id = #{record.logId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userMoney != null" >
+        user_money = #{record.userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.frozenMoney != null" >
+        frozen_money = #{record.frozenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rankPoints != null" >
+        rank_points = #{record.rankPoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.payPoints != null" >
+        pay_points = #{record.payPoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.changeTime != null" >
+        change_time = #{record.changeTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.changeDesc != null" >
+        change_desc = #{record.changeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changeType != null" >
+        change_type = #{record.changeType,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update account_log
+    set log_id = #{record.logId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      user_money = #{record.userMoney,jdbcType=DECIMAL},
+      frozen_money = #{record.frozenMoney,jdbcType=DECIMAL},
+      rank_points = #{record.rankPoints,jdbcType=INTEGER},
+      pay_points = #{record.payPoints,jdbcType=INTEGER},
+      change_time = #{record.changeTime,jdbcType=INTEGER},
+      change_desc = #{record.changeDesc,jdbcType=VARCHAR},
+      change_type = #{record.changeType,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.AccountLog" >
+    update account_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userMoney != null" >
+        user_money = #{userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenMoney != null" >
+        frozen_money = #{frozenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="rankPoints != null" >
+        rank_points = #{rankPoints,jdbcType=INTEGER},
+      </if>
+      <if test="payPoints != null" >
+        pay_points = #{payPoints,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime,jdbcType=INTEGER},
+      </if>
+      <if test="changeDesc != null" >
+        change_desc = #{changeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null" >
+        change_type = #{changeType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.AccountLog" >
+    update account_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_money = #{userMoney,jdbcType=DECIMAL},
+      frozen_money = #{frozenMoney,jdbcType=DECIMAL},
+      rank_points = #{rankPoints,jdbcType=INTEGER},
+      pay_points = #{payPoints,jdbcType=INTEGER},
+      change_time = #{changeTime,jdbcType=INTEGER},
+      change_desc = #{changeDesc,jdbcType=VARCHAR},
+      change_type = #{changeType,jdbcType=TINYINT}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>

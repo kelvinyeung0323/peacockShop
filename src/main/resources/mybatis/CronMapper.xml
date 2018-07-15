@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.CronMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.Cron" >
+    <constructor >
+      <idArg column="cron_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="cron_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cron_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cron_order" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="thistime" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="nextime" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="day" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="week" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hour" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="minute" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enable" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="run_once" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="allow_ip" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="alow_files" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.peacock.shop.web.domain.CronWithBLOBs" >
+    <constructor >
+      <idArg column="cron_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="cron_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cron_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cron_order" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="thistime" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="nextime" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="day" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="week" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hour" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="minute" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enable" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="run_once" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="allow_ip" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="alow_files" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cron_desc" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="cron_config" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cron_id, cron_code, cron_name, cron_order, thistime, nextime, day, week, hour, minute, 
+    enable, run_once, allow_ip, alow_files
+  </sql>
+  <sql id="Blob_Column_List" >
+    cron_desc, cron_config
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.peacock.shop.web.domain.CronExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from crons
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.CronExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from crons
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Byte" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from crons
+    where cron_id = #{cronId,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte" >
+    delete from crons
+    where cron_id = #{cronId,jdbcType=TINYINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.CronExample" >
+    delete from crons
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.CronWithBLOBs" >
+    insert into crons (cron_id, cron_code, cron_name, 
+      cron_order, thistime, nextime, 
+      day, week, hour, minute, 
+      enable, run_once, allow_ip, alow_files, 
+      cron_desc, cron_config)
+    values (#{cronId,jdbcType=TINYINT}, #{cronCode,jdbcType=VARCHAR}, #{cronName,jdbcType=VARCHAR}, 
+      #{cronOrder,jdbcType=TINYINT}, #{thistime,jdbcType=INTEGER}, #{nextime,jdbcType=INTEGER}, 
+      #{day,jdbcType=TINYINT}, #{week,jdbcType=VARCHAR}, #{hour,jdbcType=VARCHAR}, #{minute,jdbcType=VARCHAR}, 
+      #{enable,jdbcType=BIT}, #{runOnce,jdbcType=BIT}, #{allowIp,jdbcType=VARCHAR}, #{alowFiles,jdbcType=VARCHAR}, 
+      #{cronDesc,jdbcType=LONGVARCHAR}, #{cronConfig,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.CronWithBLOBs" >
+    insert into crons
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cronId != null" >
+        cron_id,
+      </if>
+      <if test="cronCode != null" >
+        cron_code,
+      </if>
+      <if test="cronName != null" >
+        cron_name,
+      </if>
+      <if test="cronOrder != null" >
+        cron_order,
+      </if>
+      <if test="thistime != null" >
+        thistime,
+      </if>
+      <if test="nextime != null" >
+        nextime,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="week != null" >
+        week,
+      </if>
+      <if test="hour != null" >
+        hour,
+      </if>
+      <if test="minute != null" >
+        minute,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="runOnce != null" >
+        run_once,
+      </if>
+      <if test="allowIp != null" >
+        allow_ip,
+      </if>
+      <if test="alowFiles != null" >
+        alow_files,
+      </if>
+      <if test="cronDesc != null" >
+        cron_desc,
+      </if>
+      <if test="cronConfig != null" >
+        cron_config,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cronId != null" >
+        #{cronId,jdbcType=TINYINT},
+      </if>
+      <if test="cronCode != null" >
+        #{cronCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cronName != null" >
+        #{cronName,jdbcType=VARCHAR},
+      </if>
+      <if test="cronOrder != null" >
+        #{cronOrder,jdbcType=TINYINT},
+      </if>
+      <if test="thistime != null" >
+        #{thistime,jdbcType=INTEGER},
+      </if>
+      <if test="nextime != null" >
+        #{nextime,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=TINYINT},
+      </if>
+      <if test="week != null" >
+        #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="hour != null" >
+        #{hour,jdbcType=VARCHAR},
+      </if>
+      <if test="minute != null" >
+        #{minute,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+      <if test="runOnce != null" >
+        #{runOnce,jdbcType=BIT},
+      </if>
+      <if test="allowIp != null" >
+        #{allowIp,jdbcType=VARCHAR},
+      </if>
+      <if test="alowFiles != null" >
+        #{alowFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="cronDesc != null" >
+        #{cronDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cronConfig != null" >
+        #{cronConfig,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.CronExample" resultType="java.lang.Integer" >
+    select count(*) from crons
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update crons
+    <set >
+      <if test="record.cronId != null" >
+        cron_id = #{record.cronId,jdbcType=TINYINT},
+      </if>
+      <if test="record.cronCode != null" >
+        cron_code = #{record.cronCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cronName != null" >
+        cron_name = #{record.cronName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cronOrder != null" >
+        cron_order = #{record.cronOrder,jdbcType=TINYINT},
+      </if>
+      <if test="record.thistime != null" >
+        thistime = #{record.thistime,jdbcType=INTEGER},
+      </if>
+      <if test="record.nextime != null" >
+        nextime = #{record.nextime,jdbcType=INTEGER},
+      </if>
+      <if test="record.day != null" >
+        day = #{record.day,jdbcType=TINYINT},
+      </if>
+      <if test="record.week != null" >
+        week = #{record.week,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hour != null" >
+        hour = #{record.hour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minute != null" >
+        minute = #{record.minute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=BIT},
+      </if>
+      <if test="record.runOnce != null" >
+        run_once = #{record.runOnce,jdbcType=BIT},
+      </if>
+      <if test="record.allowIp != null" >
+        allow_ip = #{record.allowIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alowFiles != null" >
+        alow_files = #{record.alowFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cronDesc != null" >
+        cron_desc = #{record.cronDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.cronConfig != null" >
+        cron_config = #{record.cronConfig,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update crons
+    set cron_id = #{record.cronId,jdbcType=TINYINT},
+      cron_code = #{record.cronCode,jdbcType=VARCHAR},
+      cron_name = #{record.cronName,jdbcType=VARCHAR},
+      cron_order = #{record.cronOrder,jdbcType=TINYINT},
+      thistime = #{record.thistime,jdbcType=INTEGER},
+      nextime = #{record.nextime,jdbcType=INTEGER},
+      day = #{record.day,jdbcType=TINYINT},
+      week = #{record.week,jdbcType=VARCHAR},
+      hour = #{record.hour,jdbcType=VARCHAR},
+      minute = #{record.minute,jdbcType=VARCHAR},
+      enable = #{record.enable,jdbcType=BIT},
+      run_once = #{record.runOnce,jdbcType=BIT},
+      allow_ip = #{record.allowIp,jdbcType=VARCHAR},
+      alow_files = #{record.alowFiles,jdbcType=VARCHAR},
+      cron_desc = #{record.cronDesc,jdbcType=LONGVARCHAR},
+      cron_config = #{record.cronConfig,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update crons
+    set cron_id = #{record.cronId,jdbcType=TINYINT},
+      cron_code = #{record.cronCode,jdbcType=VARCHAR},
+      cron_name = #{record.cronName,jdbcType=VARCHAR},
+      cron_order = #{record.cronOrder,jdbcType=TINYINT},
+      thistime = #{record.thistime,jdbcType=INTEGER},
+      nextime = #{record.nextime,jdbcType=INTEGER},
+      day = #{record.day,jdbcType=TINYINT},
+      week = #{record.week,jdbcType=VARCHAR},
+      hour = #{record.hour,jdbcType=VARCHAR},
+      minute = #{record.minute,jdbcType=VARCHAR},
+      enable = #{record.enable,jdbcType=BIT},
+      run_once = #{record.runOnce,jdbcType=BIT},
+      allow_ip = #{record.allowIp,jdbcType=VARCHAR},
+      alow_files = #{record.alowFiles,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.CronWithBLOBs" >
+    update crons
+    <set >
+      <if test="cronCode != null" >
+        cron_code = #{cronCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cronName != null" >
+        cron_name = #{cronName,jdbcType=VARCHAR},
+      </if>
+      <if test="cronOrder != null" >
+        cron_order = #{cronOrder,jdbcType=TINYINT},
+      </if>
+      <if test="thistime != null" >
+        thistime = #{thistime,jdbcType=INTEGER},
+      </if>
+      <if test="nextime != null" >
+        nextime = #{nextime,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=TINYINT},
+      </if>
+      <if test="week != null" >
+        week = #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="hour != null" >
+        hour = #{hour,jdbcType=VARCHAR},
+      </if>
+      <if test="minute != null" >
+        minute = #{minute,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+      <if test="runOnce != null" >
+        run_once = #{runOnce,jdbcType=BIT},
+      </if>
+      <if test="allowIp != null" >
+        allow_ip = #{allowIp,jdbcType=VARCHAR},
+      </if>
+      <if test="alowFiles != null" >
+        alow_files = #{alowFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="cronDesc != null" >
+        cron_desc = #{cronDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cronConfig != null" >
+        cron_config = #{cronConfig,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where cron_id = #{cronId,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.peacock.shop.web.domain.CronWithBLOBs" >
+    update crons
+    set cron_code = #{cronCode,jdbcType=VARCHAR},
+      cron_name = #{cronName,jdbcType=VARCHAR},
+      cron_order = #{cronOrder,jdbcType=TINYINT},
+      thistime = #{thistime,jdbcType=INTEGER},
+      nextime = #{nextime,jdbcType=INTEGER},
+      day = #{day,jdbcType=TINYINT},
+      week = #{week,jdbcType=VARCHAR},
+      hour = #{hour,jdbcType=VARCHAR},
+      minute = #{minute,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=BIT},
+      run_once = #{runOnce,jdbcType=BIT},
+      allow_ip = #{allowIp,jdbcType=VARCHAR},
+      alow_files = #{alowFiles,jdbcType=VARCHAR},
+      cron_desc = #{cronDesc,jdbcType=LONGVARCHAR},
+      cron_config = #{cronConfig,jdbcType=LONGVARCHAR}
+    where cron_id = #{cronId,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.Cron" >
+    update crons
+    set cron_code = #{cronCode,jdbcType=VARCHAR},
+      cron_name = #{cronName,jdbcType=VARCHAR},
+      cron_order = #{cronOrder,jdbcType=TINYINT},
+      thistime = #{thistime,jdbcType=INTEGER},
+      nextime = #{nextime,jdbcType=INTEGER},
+      day = #{day,jdbcType=TINYINT},
+      week = #{week,jdbcType=VARCHAR},
+      hour = #{hour,jdbcType=VARCHAR},
+      minute = #{minute,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=BIT},
+      run_once = #{runOnce,jdbcType=BIT},
+      allow_ip = #{allowIp,jdbcType=VARCHAR},
+      alow_files = #{alowFiles,jdbcType=VARCHAR}
+    where cron_id = #{cronId,jdbcType=TINYINT}
+  </update>
+</mapper>

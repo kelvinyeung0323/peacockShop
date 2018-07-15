@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.VolumePriceMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.VolumePrice" >
+    <constructor >
+      <idArg column="price_type" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <idArg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="volume_number" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="volume_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    price_type, goods_id, volume_number, volume_price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.VolumePriceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from volume_price
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.VolumePriceKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from volume_price
+    where price_type = #{priceType,jdbcType=BIT}
+      and goods_id = #{goodsId,jdbcType=INTEGER}
+      and volume_number = #{volumeNumber,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.peacock.shop.web.domain.VolumePriceKey" >
+    delete from volume_price
+    where price_type = #{priceType,jdbcType=BIT}
+      and goods_id = #{goodsId,jdbcType=INTEGER}
+      and volume_number = #{volumeNumber,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.VolumePriceExample" >
+    delete from volume_price
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.VolumePrice" >
+    insert into volume_price (price_type, goods_id, volume_number, 
+      volume_price)
+    values (#{priceType,jdbcType=BIT}, #{goodsId,jdbcType=INTEGER}, #{volumeNumber,jdbcType=SMALLINT}, 
+      #{volumePrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.VolumePrice" >
+    insert into volume_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="priceType != null" >
+        price_type,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="volumeNumber != null" >
+        volume_number,
+      </if>
+      <if test="volumePrice != null" >
+        volume_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="priceType != null" >
+        #{priceType,jdbcType=BIT},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="volumeNumber != null" >
+        #{volumeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="volumePrice != null" >
+        #{volumePrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.VolumePriceExample" resultType="java.lang.Integer" >
+    select count(*) from volume_price
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update volume_price
+    <set >
+      <if test="record.priceType != null" >
+        price_type = #{record.priceType,jdbcType=BIT},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.volumeNumber != null" >
+        volume_number = #{record.volumeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="record.volumePrice != null" >
+        volume_price = #{record.volumePrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update volume_price
+    set price_type = #{record.priceType,jdbcType=BIT},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      volume_number = #{record.volumeNumber,jdbcType=SMALLINT},
+      volume_price = #{record.volumePrice,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.VolumePrice" >
+    update volume_price
+    <set >
+      <if test="volumePrice != null" >
+        volume_price = #{volumePrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where price_type = #{priceType,jdbcType=BIT}
+      and goods_id = #{goodsId,jdbcType=INTEGER}
+      and volume_number = #{volumeNumber,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.VolumePrice" >
+    update volume_price
+    set volume_price = #{volumePrice,jdbcType=DECIMAL}
+    where price_type = #{priceType,jdbcType=BIT}
+      and goods_id = #{goodsId,jdbcType=INTEGER}
+      and volume_number = #{volumeNumber,jdbcType=SMALLINT}
+  </update>
+</mapper>

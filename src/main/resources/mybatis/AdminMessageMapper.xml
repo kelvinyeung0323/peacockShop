@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.AdminMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.AdminMessage" >
+    <constructor >
+      <idArg column="message_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="sender_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="receiver_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="sent_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="read_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="readed" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="deleted" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.peacock.shop.web.domain.AdminMessage" >
+    <constructor >
+      <idArg column="message_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="sender_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="receiver_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="sent_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="read_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="readed" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="deleted" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    message_id, sender_id, receiver_id, sent_time, read_time, readed, deleted, title
+  </sql>
+  <sql id="Blob_Column_List" >
+    message
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.peacock.shop.web.domain.AdminMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from admin_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.AdminMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from admin_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from admin_message
+    where message_id = #{messageId,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from admin_message
+    where message_id = #{messageId,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.AdminMessageExample" >
+    delete from admin_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.AdminMessage" >
+    insert into admin_message (message_id, sender_id, receiver_id, 
+      sent_time, read_time, readed, 
+      deleted, title, message
+      )
+    values (#{messageId,jdbcType=SMALLINT}, #{senderId,jdbcType=TINYINT}, #{receiverId,jdbcType=TINYINT}, 
+      #{sentTime,jdbcType=INTEGER}, #{readTime,jdbcType=INTEGER}, #{readed,jdbcType=BIT}, 
+      #{deleted,jdbcType=BIT}, #{title,jdbcType=VARCHAR}, #{message,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.AdminMessage" >
+    insert into admin_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="senderId != null" >
+        sender_id,
+      </if>
+      <if test="receiverId != null" >
+        receiver_id,
+      </if>
+      <if test="sentTime != null" >
+        sent_time,
+      </if>
+      <if test="readTime != null" >
+        read_time,
+      </if>
+      <if test="readed != null" >
+        readed,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        #{messageId,jdbcType=SMALLINT},
+      </if>
+      <if test="senderId != null" >
+        #{senderId,jdbcType=TINYINT},
+      </if>
+      <if test="receiverId != null" >
+        #{receiverId,jdbcType=TINYINT},
+      </if>
+      <if test="sentTime != null" >
+        #{sentTime,jdbcType=INTEGER},
+      </if>
+      <if test="readTime != null" >
+        #{readTime,jdbcType=INTEGER},
+      </if>
+      <if test="readed != null" >
+        #{readed,jdbcType=BIT},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.AdminMessageExample" resultType="java.lang.Integer" >
+    select count(*) from admin_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admin_message
+    <set >
+      <if test="record.messageId != null" >
+        message_id = #{record.messageId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.senderId != null" >
+        sender_id = #{record.senderId,jdbcType=TINYINT},
+      </if>
+      <if test="record.receiverId != null" >
+        receiver_id = #{record.receiverId,jdbcType=TINYINT},
+      </if>
+      <if test="record.sentTime != null" >
+        sent_time = #{record.sentTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.readTime != null" >
+        read_time = #{record.readTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.readed != null" >
+        readed = #{record.readed,jdbcType=BIT},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=BIT},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update admin_message
+    set message_id = #{record.messageId,jdbcType=SMALLINT},
+      sender_id = #{record.senderId,jdbcType=TINYINT},
+      receiver_id = #{record.receiverId,jdbcType=TINYINT},
+      sent_time = #{record.sentTime,jdbcType=INTEGER},
+      read_time = #{record.readTime,jdbcType=INTEGER},
+      readed = #{record.readed,jdbcType=BIT},
+      deleted = #{record.deleted,jdbcType=BIT},
+      title = #{record.title,jdbcType=VARCHAR},
+      message = #{record.message,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admin_message
+    set message_id = #{record.messageId,jdbcType=SMALLINT},
+      sender_id = #{record.senderId,jdbcType=TINYINT},
+      receiver_id = #{record.receiverId,jdbcType=TINYINT},
+      sent_time = #{record.sentTime,jdbcType=INTEGER},
+      read_time = #{record.readTime,jdbcType=INTEGER},
+      readed = #{record.readed,jdbcType=BIT},
+      deleted = #{record.deleted,jdbcType=BIT},
+      title = #{record.title,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.AdminMessage" >
+    update admin_message
+    <set >
+      <if test="senderId != null" >
+        sender_id = #{senderId,jdbcType=TINYINT},
+      </if>
+      <if test="receiverId != null" >
+        receiver_id = #{receiverId,jdbcType=TINYINT},
+      </if>
+      <if test="sentTime != null" >
+        sent_time = #{sentTime,jdbcType=INTEGER},
+      </if>
+      <if test="readTime != null" >
+        read_time = #{readTime,jdbcType=INTEGER},
+      </if>
+      <if test="readed != null" >
+        readed = #{readed,jdbcType=BIT},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.peacock.shop.web.domain.AdminMessage" >
+    update admin_message
+    set sender_id = #{senderId,jdbcType=TINYINT},
+      receiver_id = #{receiverId,jdbcType=TINYINT},
+      sent_time = #{sentTime,jdbcType=INTEGER},
+      read_time = #{readTime,jdbcType=INTEGER},
+      readed = #{readed,jdbcType=BIT},
+      deleted = #{deleted,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR},
+      message = #{message,jdbcType=LONGVARCHAR}
+    where message_id = #{messageId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.AdminMessage" >
+    update admin_message
+    set sender_id = #{senderId,jdbcType=TINYINT},
+      receiver_id = #{receiverId,jdbcType=TINYINT},
+      sent_time = #{sentTime,jdbcType=INTEGER},
+      read_time = #{readTime,jdbcType=INTEGER},
+      readed = #{readed,jdbcType=BIT},
+      deleted = #{deleted,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR}
+    where message_id = #{messageId,jdbcType=SMALLINT}
+  </update>
+</mapper>

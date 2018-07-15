@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.UserFeedMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.UserFeed" >
+    <constructor >
+      <idArg column="feed_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="value_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="feed_type" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="is_feed" jdbcType="BIT" javaType="java.lang.Boolean" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    feed_id, user_id, value_id, goods_id, feed_type, is_feed
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.UserFeedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_feed
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_feed
+    where feed_id = #{feedId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_feed
+    where feed_id = #{feedId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.UserFeedExample" >
+    delete from user_feed
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.UserFeed" >
+    insert into user_feed (feed_id, user_id, value_id, 
+      goods_id, feed_type, is_feed)
+    values (#{feedId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{valueId,jdbcType=INTEGER}, 
+      #{goodsId,jdbcType=INTEGER}, #{feedType,jdbcType=BIT}, #{isFeed,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.UserFeed" >
+    insert into user_feed
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="feedId != null" >
+        feed_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="valueId != null" >
+        value_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="feedType != null" >
+        feed_type,
+      </if>
+      <if test="isFeed != null" >
+        is_feed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="feedId != null" >
+        #{feedId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="valueId != null" >
+        #{valueId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="feedType != null" >
+        #{feedType,jdbcType=BIT},
+      </if>
+      <if test="isFeed != null" >
+        #{isFeed,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.UserFeedExample" resultType="java.lang.Integer" >
+    select count(*) from user_feed
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_feed
+    <set >
+      <if test="record.feedId != null" >
+        feed_id = #{record.feedId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.valueId != null" >
+        value_id = #{record.valueId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.feedType != null" >
+        feed_type = #{record.feedType,jdbcType=BIT},
+      </if>
+      <if test="record.isFeed != null" >
+        is_feed = #{record.isFeed,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_feed
+    set feed_id = #{record.feedId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      value_id = #{record.valueId,jdbcType=INTEGER},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      feed_type = #{record.feedType,jdbcType=BIT},
+      is_feed = #{record.isFeed,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.UserFeed" >
+    update user_feed
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="valueId != null" >
+        value_id = #{valueId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="feedType != null" >
+        feed_type = #{feedType,jdbcType=BIT},
+      </if>
+      <if test="isFeed != null" >
+        is_feed = #{isFeed,jdbcType=BIT},
+      </if>
+    </set>
+    where feed_id = #{feedId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.UserFeed" >
+    update user_feed
+    set user_id = #{userId,jdbcType=INTEGER},
+      value_id = #{valueId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      feed_type = #{feedType,jdbcType=BIT},
+      is_feed = #{isFeed,jdbcType=BIT}
+    where feed_id = #{feedId,jdbcType=INTEGER}
+  </update>
+</mapper>

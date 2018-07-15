@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.SessionMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.Session" >
+    <constructor >
+      <idArg column="sesskey" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="expiry" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="userid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="adminid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ip" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_rank" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="discount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="data" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sesskey, expiry, userid, adminid, ip, user_name, user_rank, discount, email, data
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.SessionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sessions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sessions
+    where sesskey = #{sesskey,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sessions
+    where sesskey = #{sesskey,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.SessionExample" >
+    delete from sessions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.Session" >
+    insert into sessions (sesskey, expiry, userid, 
+      adminid, ip, user_name, 
+      user_rank, discount, email, 
+      data)
+    values (#{sesskey,jdbcType=CHAR}, #{expiry,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{adminid,jdbcType=INTEGER}, #{ip,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userRank,jdbcType=TINYINT}, #{discount,jdbcType=DECIMAL}, #{email,jdbcType=VARCHAR}, 
+      #{data,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.Session" >
+    insert into sessions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sesskey != null" >
+        sesskey,
+      </if>
+      <if test="expiry != null" >
+        expiry,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="adminid != null" >
+        adminid,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userRank != null" >
+        user_rank,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sesskey != null" >
+        #{sesskey,jdbcType=CHAR},
+      </if>
+      <if test="expiry != null" >
+        #{expiry,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userRank != null" >
+        #{userRank,jdbcType=TINYINT},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.SessionExample" resultType="java.lang.Integer" >
+    select count(*) from sessions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sessions
+    <set >
+      <if test="record.sesskey != null" >
+        sesskey = #{record.sesskey,jdbcType=CHAR},
+      </if>
+      <if test="record.expiry != null" >
+        expiry = #{record.expiry,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        adminid = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=CHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userRank != null" >
+        user_rank = #{record.userRank,jdbcType=TINYINT},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.data != null" >
+        data = #{record.data,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sessions
+    set sesskey = #{record.sesskey,jdbcType=CHAR},
+      expiry = #{record.expiry,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=INTEGER},
+      adminid = #{record.adminid,jdbcType=INTEGER},
+      ip = #{record.ip,jdbcType=CHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_rank = #{record.userRank,jdbcType=TINYINT},
+      discount = #{record.discount,jdbcType=DECIMAL},
+      email = #{record.email,jdbcType=VARCHAR},
+      data = #{record.data,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.Session" >
+    update sessions
+    <set >
+      <if test="expiry != null" >
+        expiry = #{expiry,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        adminid = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userRank != null" >
+        user_rank = #{userRank,jdbcType=TINYINT},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=CHAR},
+      </if>
+    </set>
+    where sesskey = #{sesskey,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.Session" >
+    update sessions
+    set expiry = #{expiry,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      adminid = #{adminid,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=CHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_rank = #{userRank,jdbcType=TINYINT},
+      discount = #{discount,jdbcType=DECIMAL},
+      email = #{email,jdbcType=VARCHAR},
+      data = #{data,jdbcType=CHAR}
+    where sesskey = #{sesskey,jdbcType=CHAR}
+  </update>
+</mapper>

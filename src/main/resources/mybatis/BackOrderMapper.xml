@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.BackOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.BackOrder" >
+    <constructor >
+      <idArg column="back_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="delivery_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="invoice_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="add_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="shipping_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="shipping_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="action_user" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="consignee" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="country" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="province" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="city" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="district" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="sign_building" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="zipcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="best_time" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="postscript" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="how_oos" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="insure_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="shipping_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="update_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="suppliers_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="status" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="return_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="agency_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    back_id, delivery_sn, order_sn, order_id, invoice_no, add_time, shipping_id, shipping_name, 
+    user_id, action_user, consignee, address, country, province, city, district, sign_building, 
+    email, zipcode, tel, mobile, best_time, postscript, how_oos, insure_fee, shipping_fee, 
+    update_time, suppliers_id, status, return_time, agency_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.BackOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from back_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from back_order
+    where back_id = #{backId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from back_order
+    where back_id = #{backId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.BackOrderExample" >
+    delete from back_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.BackOrder" >
+    insert into back_order (back_id, delivery_sn, order_sn, 
+      order_id, invoice_no, add_time, 
+      shipping_id, shipping_name, user_id, 
+      action_user, consignee, address, 
+      country, province, city, 
+      district, sign_building, email, 
+      zipcode, tel, mobile, 
+      best_time, postscript, how_oos, 
+      insure_fee, shipping_fee, update_time, 
+      suppliers_id, status, return_time, 
+      agency_id)
+    values (#{backId,jdbcType=INTEGER}, #{deliverySn,jdbcType=VARCHAR}, #{orderSn,jdbcType=VARCHAR}, 
+      #{orderId,jdbcType=INTEGER}, #{invoiceNo,jdbcType=VARCHAR}, #{addTime,jdbcType=INTEGER}, 
+      #{shippingId,jdbcType=TINYINT}, #{shippingName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{actionUser,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{country,jdbcType=SMALLINT}, #{province,jdbcType=SMALLINT}, #{city,jdbcType=SMALLINT}, 
+      #{district,jdbcType=SMALLINT}, #{signBuilding,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{zipcode,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{bestTime,jdbcType=VARCHAR}, #{postscript,jdbcType=VARCHAR}, #{howOos,jdbcType=VARCHAR}, 
+      #{insureFee,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL}, #{updateTime,jdbcType=INTEGER}, 
+      #{suppliersId,jdbcType=SMALLINT}, #{status,jdbcType=BIT}, #{returnTime,jdbcType=INTEGER}, 
+      #{agencyId,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.BackOrder" >
+    insert into back_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="backId != null" >
+        back_id,
+      </if>
+      <if test="deliverySn != null" >
+        delivery_sn,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="invoiceNo != null" >
+        invoice_no,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="shippingId != null" >
+        shipping_id,
+      </if>
+      <if test="shippingName != null" >
+        shipping_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="actionUser != null" >
+        action_user,
+      </if>
+      <if test="consignee != null" >
+        consignee,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="signBuilding != null" >
+        sign_building,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="zipcode != null" >
+        zipcode,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="bestTime != null" >
+        best_time,
+      </if>
+      <if test="postscript != null" >
+        postscript,
+      </if>
+      <if test="howOos != null" >
+        how_oos,
+      </if>
+      <if test="insureFee != null" >
+        insure_fee,
+      </if>
+      <if test="shippingFee != null" >
+        shipping_fee,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="suppliersId != null" >
+        suppliers_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="returnTime != null" >
+        return_time,
+      </if>
+      <if test="agencyId != null" >
+        agency_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="backId != null" >
+        #{backId,jdbcType=INTEGER},
+      </if>
+      <if test="deliverySn != null" >
+        #{deliverySn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNo != null" >
+        #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="shippingId != null" >
+        #{shippingId,jdbcType=TINYINT},
+      </if>
+      <if test="shippingName != null" >
+        #{shippingName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="actionUser != null" >
+        #{actionUser,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=SMALLINT},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=SMALLINT},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=SMALLINT},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=SMALLINT},
+      </if>
+      <if test="signBuilding != null" >
+        #{signBuilding,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="bestTime != null" >
+        #{bestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="postscript != null" >
+        #{postscript,jdbcType=VARCHAR},
+      </if>
+      <if test="howOos != null" >
+        #{howOos,jdbcType=VARCHAR},
+      </if>
+      <if test="insureFee != null" >
+        #{insureFee,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingFee != null" >
+        #{shippingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="suppliersId != null" >
+        #{suppliersId,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=INTEGER},
+      </if>
+      <if test="agencyId != null" >
+        #{agencyId,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.BackOrderExample" resultType="java.lang.Integer" >
+    select count(*) from back_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update back_order
+    <set >
+      <if test="record.backId != null" >
+        back_id = #{record.backId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliverySn != null" >
+        delivery_sn = #{record.deliverySn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderSn != null" >
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.invoiceNo != null" >
+        invoice_no = #{record.invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        add_time = #{record.addTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.shippingId != null" >
+        shipping_id = #{record.shippingId,jdbcType=TINYINT},
+      </if>
+      <if test="record.shippingName != null" >
+        shipping_name = #{record.shippingName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.actionUser != null" >
+        action_user = #{record.actionUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignee != null" >
+        consignee = #{record.consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=SMALLINT},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=SMALLINT},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=SMALLINT},
+      </if>
+      <if test="record.district != null" >
+        district = #{record.district,jdbcType=SMALLINT},
+      </if>
+      <if test="record.signBuilding != null" >
+        sign_building = #{record.signBuilding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipcode != null" >
+        zipcode = #{record.zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bestTime != null" >
+        best_time = #{record.bestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postscript != null" >
+        postscript = #{record.postscript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.howOos != null" >
+        how_oos = #{record.howOos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insureFee != null" >
+        insure_fee = #{record.insureFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shippingFee != null" >
+        shipping_fee = #{record.shippingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.suppliersId != null" >
+        suppliers_id = #{record.suppliersId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.returnTime != null" >
+        return_time = #{record.returnTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.agencyId != null" >
+        agency_id = #{record.agencyId,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update back_order
+    set back_id = #{record.backId,jdbcType=INTEGER},
+      delivery_sn = #{record.deliverySn,jdbcType=VARCHAR},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      invoice_no = #{record.invoiceNo,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=INTEGER},
+      shipping_id = #{record.shippingId,jdbcType=TINYINT},
+      shipping_name = #{record.shippingName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      action_user = #{record.actionUser,jdbcType=VARCHAR},
+      consignee = #{record.consignee,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=SMALLINT},
+      province = #{record.province,jdbcType=SMALLINT},
+      city = #{record.city,jdbcType=SMALLINT},
+      district = #{record.district,jdbcType=SMALLINT},
+      sign_building = #{record.signBuilding,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      zipcode = #{record.zipcode,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      best_time = #{record.bestTime,jdbcType=VARCHAR},
+      postscript = #{record.postscript,jdbcType=VARCHAR},
+      how_oos = #{record.howOos,jdbcType=VARCHAR},
+      insure_fee = #{record.insureFee,jdbcType=DECIMAL},
+      shipping_fee = #{record.shippingFee,jdbcType=DECIMAL},
+      update_time = #{record.updateTime,jdbcType=INTEGER},
+      suppliers_id = #{record.suppliersId,jdbcType=SMALLINT},
+      status = #{record.status,jdbcType=BIT},
+      return_time = #{record.returnTime,jdbcType=INTEGER},
+      agency_id = #{record.agencyId,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.BackOrder" >
+    update back_order
+    <set >
+      <if test="deliverySn != null" >
+        delivery_sn = #{deliverySn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNo != null" >
+        invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="shippingId != null" >
+        shipping_id = #{shippingId,jdbcType=TINYINT},
+      </if>
+      <if test="shippingName != null" >
+        shipping_name = #{shippingName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="actionUser != null" >
+        action_user = #{actionUser,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=SMALLINT},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=SMALLINT},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=SMALLINT},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=SMALLINT},
+      </if>
+      <if test="signBuilding != null" >
+        sign_building = #{signBuilding,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="bestTime != null" >
+        best_time = #{bestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="postscript != null" >
+        postscript = #{postscript,jdbcType=VARCHAR},
+      </if>
+      <if test="howOos != null" >
+        how_oos = #{howOos,jdbcType=VARCHAR},
+      </if>
+      <if test="insureFee != null" >
+        insure_fee = #{insureFee,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingFee != null" >
+        shipping_fee = #{shippingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="suppliersId != null" >
+        suppliers_id = #{suppliersId,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="returnTime != null" >
+        return_time = #{returnTime,jdbcType=INTEGER},
+      </if>
+      <if test="agencyId != null" >
+        agency_id = #{agencyId,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where back_id = #{backId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.BackOrder" >
+    update back_order
+    set delivery_sn = #{deliverySn,jdbcType=VARCHAR},
+      order_sn = #{orderSn,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=INTEGER},
+      shipping_id = #{shippingId,jdbcType=TINYINT},
+      shipping_name = #{shippingName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      action_user = #{actionUser,jdbcType=VARCHAR},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      country = #{country,jdbcType=SMALLINT},
+      province = #{province,jdbcType=SMALLINT},
+      city = #{city,jdbcType=SMALLINT},
+      district = #{district,jdbcType=SMALLINT},
+      sign_building = #{signBuilding,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      best_time = #{bestTime,jdbcType=VARCHAR},
+      postscript = #{postscript,jdbcType=VARCHAR},
+      how_oos = #{howOos,jdbcType=VARCHAR},
+      insure_fee = #{insureFee,jdbcType=DECIMAL},
+      shipping_fee = #{shippingFee,jdbcType=DECIMAL},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      suppliers_id = #{suppliersId,jdbcType=SMALLINT},
+      status = #{status,jdbcType=BIT},
+      return_time = #{returnTime,jdbcType=INTEGER},
+      agency_id = #{agencyId,jdbcType=SMALLINT}
+    where back_id = #{backId,jdbcType=INTEGER}
+  </update>
+</mapper>

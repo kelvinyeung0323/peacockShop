@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.VirtualCardMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.VirtualCard" >
+    <constructor >
+      <idArg column="card_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="card_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="add_date" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="end_date" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="is_saled" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="order_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="crc32" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    card_id, goods_id, card_sn, card_password, add_date, end_date, is_saled, order_sn, 
+    crc32
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.VirtualCardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from virtual_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from virtual_card
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from virtual_card
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.VirtualCardExample" >
+    delete from virtual_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.VirtualCard" >
+    insert into virtual_card (card_id, goods_id, card_sn, 
+      card_password, add_date, end_date, 
+      is_saled, order_sn, crc32
+      )
+    values (#{cardId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{cardSn,jdbcType=VARCHAR}, 
+      #{cardPassword,jdbcType=VARCHAR}, #{addDate,jdbcType=INTEGER}, #{endDate,jdbcType=INTEGER}, 
+      #{isSaled,jdbcType=BIT}, #{orderSn,jdbcType=VARCHAR}, #{crc32,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.VirtualCard" >
+    insert into virtual_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="cardSn != null" >
+        card_sn,
+      </if>
+      <if test="cardPassword != null" >
+        card_password,
+      </if>
+      <if test="addDate != null" >
+        add_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="isSaled != null" >
+        is_saled,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="crc32 != null" >
+        crc32,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cardId != null" >
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="cardSn != null" >
+        #{cardSn,jdbcType=VARCHAR},
+      </if>
+      <if test="cardPassword != null" >
+        #{cardPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="addDate != null" >
+        #{addDate,jdbcType=INTEGER},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=INTEGER},
+      </if>
+      <if test="isSaled != null" >
+        #{isSaled,jdbcType=BIT},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="crc32 != null" >
+        #{crc32,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.VirtualCardExample" resultType="java.lang.Integer" >
+    select count(*) from virtual_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update virtual_card
+    <set >
+      <if test="record.cardId != null" >
+        card_id = #{record.cardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardSn != null" >
+        card_sn = #{record.cardSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardPassword != null" >
+        card_password = #{record.cardPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addDate != null" >
+        add_date = #{record.addDate,jdbcType=INTEGER},
+      </if>
+      <if test="record.endDate != null" >
+        end_date = #{record.endDate,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSaled != null" >
+        is_saled = #{record.isSaled,jdbcType=BIT},
+      </if>
+      <if test="record.orderSn != null" >
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crc32 != null" >
+        crc32 = #{record.crc32,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update virtual_card
+    set card_id = #{record.cardId,jdbcType=INTEGER},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      card_sn = #{record.cardSn,jdbcType=VARCHAR},
+      card_password = #{record.cardPassword,jdbcType=VARCHAR},
+      add_date = #{record.addDate,jdbcType=INTEGER},
+      end_date = #{record.endDate,jdbcType=INTEGER},
+      is_saled = #{record.isSaled,jdbcType=BIT},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      crc32 = #{record.crc32,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.VirtualCard" >
+    update virtual_card
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="cardSn != null" >
+        card_sn = #{cardSn,jdbcType=VARCHAR},
+      </if>
+      <if test="cardPassword != null" >
+        card_password = #{cardPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="addDate != null" >
+        add_date = #{addDate,jdbcType=INTEGER},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=INTEGER},
+      </if>
+      <if test="isSaled != null" >
+        is_saled = #{isSaled,jdbcType=BIT},
+      </if>
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="crc32 != null" >
+        crc32 = #{crc32,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.VirtualCard" >
+    update virtual_card
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      card_sn = #{cardSn,jdbcType=VARCHAR},
+      card_password = #{cardPassword,jdbcType=VARCHAR},
+      add_date = #{addDate,jdbcType=INTEGER},
+      end_date = #{endDate,jdbcType=INTEGER},
+      is_saled = #{isSaled,jdbcType=BIT},
+      order_sn = #{orderSn,jdbcType=VARCHAR},
+      crc32 = #{crc32,jdbcType=VARCHAR}
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+</mapper>

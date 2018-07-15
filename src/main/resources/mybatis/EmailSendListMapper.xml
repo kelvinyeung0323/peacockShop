@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.EmailSendListMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.EmailSendList" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="template_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="error" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="pri" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="last_send" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.peacock.shop.web.domain.EmailSendList" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="template_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="error" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="pri" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="last_send" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="email_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, email, template_id, error, pri, last_send
+  </sql>
+  <sql id="Blob_Column_List" >
+    email_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.peacock.shop.web.domain.EmailSendListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from email_sendlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.EmailSendListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from email_sendlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from email_sendlist
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from email_sendlist
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.EmailSendListExample" >
+    delete from email_sendlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.EmailSendList" >
+    insert into email_sendlist (id, email, template_id, 
+      error, pri, last_send, email_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{templateId,jdbcType=INTEGER}, 
+      #{error,jdbcType=BIT}, #{pri,jdbcType=TINYINT}, #{lastSend,jdbcType=INTEGER}, #{emailContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.EmailSendList" >
+    insert into email_sendlist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="error != null" >
+        error,
+      </if>
+      <if test="pri != null" >
+        pri,
+      </if>
+      <if test="lastSend != null" >
+        last_send,
+      </if>
+      <if test="emailContent != null" >
+        email_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="error != null" >
+        #{error,jdbcType=BIT},
+      </if>
+      <if test="pri != null" >
+        #{pri,jdbcType=TINYINT},
+      </if>
+      <if test="lastSend != null" >
+        #{lastSend,jdbcType=INTEGER},
+      </if>
+      <if test="emailContent != null" >
+        #{emailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.EmailSendListExample" resultType="java.lang.Integer" >
+    select count(*) from email_sendlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update email_sendlist
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateId != null" >
+        template_id = #{record.templateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.error != null" >
+        error = #{record.error,jdbcType=BIT},
+      </if>
+      <if test="record.pri != null" >
+        pri = #{record.pri,jdbcType=TINYINT},
+      </if>
+      <if test="record.lastSend != null" >
+        last_send = #{record.lastSend,jdbcType=INTEGER},
+      </if>
+      <if test="record.emailContent != null" >
+        email_content = #{record.emailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update email_sendlist
+    set id = #{record.id,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      template_id = #{record.templateId,jdbcType=INTEGER},
+      error = #{record.error,jdbcType=BIT},
+      pri = #{record.pri,jdbcType=TINYINT},
+      last_send = #{record.lastSend,jdbcType=INTEGER},
+      email_content = #{record.emailContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update email_sendlist
+    set id = #{record.id,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      template_id = #{record.templateId,jdbcType=INTEGER},
+      error = #{record.error,jdbcType=BIT},
+      pri = #{record.pri,jdbcType=TINYINT},
+      last_send = #{record.lastSend,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.EmailSendList" >
+    update email_sendlist
+    <set >
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        template_id = #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="error != null" >
+        error = #{error,jdbcType=BIT},
+      </if>
+      <if test="pri != null" >
+        pri = #{pri,jdbcType=TINYINT},
+      </if>
+      <if test="lastSend != null" >
+        last_send = #{lastSend,jdbcType=INTEGER},
+      </if>
+      <if test="emailContent != null" >
+        email_content = #{emailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.peacock.shop.web.domain.EmailSendList" >
+    update email_sendlist
+    set email = #{email,jdbcType=VARCHAR},
+      template_id = #{templateId,jdbcType=INTEGER},
+      error = #{error,jdbcType=BIT},
+      pri = #{pri,jdbcType=TINYINT},
+      last_send = #{lastSend,jdbcType=INTEGER},
+      email_content = #{emailContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.EmailSendList" >
+    update email_sendlist
+    set email = #{email,jdbcType=VARCHAR},
+      template_id = #{templateId,jdbcType=INTEGER},
+      error = #{error,jdbcType=BIT},
+      pri = #{pri,jdbcType=TINYINT},
+      last_send = #{lastSend,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

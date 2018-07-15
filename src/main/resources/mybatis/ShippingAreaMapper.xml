@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.ShippingAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.ShippingArea" >
+    <constructor >
+      <idArg column="shipping_area_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="shipping_area_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="shipping_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.peacock.shop.web.domain.ShippingArea" >
+    <constructor >
+      <idArg column="shipping_area_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="shipping_area_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="shipping_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="configure" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shipping_area_id, shipping_area_name, shipping_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    configure
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.peacock.shop.web.domain.ShippingAreaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipping_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.ShippingAreaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shipping_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipping_area
+    where shipping_area_id = #{shippingAreaId,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from shipping_area
+    where shipping_area_id = #{shippingAreaId,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.ShippingAreaExample" >
+    delete from shipping_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.ShippingArea" >
+    insert into shipping_area (shipping_area_id, shipping_area_name, 
+      shipping_id, configure)
+    values (#{shippingAreaId,jdbcType=SMALLINT}, #{shippingAreaName,jdbcType=VARCHAR}, 
+      #{shippingId,jdbcType=TINYINT}, #{configure,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.ShippingArea" >
+    insert into shipping_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shippingAreaId != null" >
+        shipping_area_id,
+      </if>
+      <if test="shippingAreaName != null" >
+        shipping_area_name,
+      </if>
+      <if test="shippingId != null" >
+        shipping_id,
+      </if>
+      <if test="configure != null" >
+        configure,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shippingAreaId != null" >
+        #{shippingAreaId,jdbcType=SMALLINT},
+      </if>
+      <if test="shippingAreaName != null" >
+        #{shippingAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingId != null" >
+        #{shippingId,jdbcType=TINYINT},
+      </if>
+      <if test="configure != null" >
+        #{configure,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.ShippingAreaExample" resultType="java.lang.Integer" >
+    select count(*) from shipping_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shipping_area
+    <set >
+      <if test="record.shippingAreaId != null" >
+        shipping_area_id = #{record.shippingAreaId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.shippingAreaName != null" >
+        shipping_area_name = #{record.shippingAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingId != null" >
+        shipping_id = #{record.shippingId,jdbcType=TINYINT},
+      </if>
+      <if test="record.configure != null" >
+        configure = #{record.configure,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update shipping_area
+    set shipping_area_id = #{record.shippingAreaId,jdbcType=SMALLINT},
+      shipping_area_name = #{record.shippingAreaName,jdbcType=VARCHAR},
+      shipping_id = #{record.shippingId,jdbcType=TINYINT},
+      configure = #{record.configure,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shipping_area
+    set shipping_area_id = #{record.shippingAreaId,jdbcType=SMALLINT},
+      shipping_area_name = #{record.shippingAreaName,jdbcType=VARCHAR},
+      shipping_id = #{record.shippingId,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.ShippingArea" >
+    update shipping_area
+    <set >
+      <if test="shippingAreaName != null" >
+        shipping_area_name = #{shippingAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingId != null" >
+        shipping_id = #{shippingId,jdbcType=TINYINT},
+      </if>
+      <if test="configure != null" >
+        configure = #{configure,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where shipping_area_id = #{shippingAreaId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.peacock.shop.web.domain.ShippingArea" >
+    update shipping_area
+    set shipping_area_name = #{shippingAreaName,jdbcType=VARCHAR},
+      shipping_id = #{shippingId,jdbcType=TINYINT},
+      configure = #{configure,jdbcType=LONGVARCHAR}
+    where shipping_area_id = #{shippingAreaId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.ShippingArea" >
+    update shipping_area
+    set shipping_area_name = #{shippingAreaName,jdbcType=VARCHAR},
+      shipping_id = #{shippingId,jdbcType=TINYINT}
+    where shipping_area_id = #{shippingAreaId,jdbcType=SMALLINT}
+  </update>
+</mapper>

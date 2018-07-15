@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.PackageGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.PackageGoods" >
+    <constructor >
+      <idArg column="package_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="admin_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <idArg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="goods_number" jdbcType="SMALLINT" javaType="java.lang.Short" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    package_id, goods_id, admin_id, product_id, goods_number
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.PackageGoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from package_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.PackageGoodsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from package_goods
+    where package_id = #{packageId,jdbcType=INTEGER}
+      and goods_id = #{goodsId,jdbcType=INTEGER}
+      and admin_id = #{adminId,jdbcType=TINYINT}
+      and product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.peacock.shop.web.domain.PackageGoodsKey" >
+    delete from package_goods
+    where package_id = #{packageId,jdbcType=INTEGER}
+      and goods_id = #{goodsId,jdbcType=INTEGER}
+      and admin_id = #{adminId,jdbcType=TINYINT}
+      and product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.PackageGoodsExample" >
+    delete from package_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.PackageGoods" >
+    insert into package_goods (package_id, goods_id, admin_id, 
+      product_id, goods_number)
+    values (#{packageId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{adminId,jdbcType=TINYINT}, 
+      #{productId,jdbcType=INTEGER}, #{goodsNumber,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.PackageGoods" >
+    insert into package_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="packageId != null" >
+        package_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="goodsNumber != null" >
+        goods_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="packageId != null" >
+        #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=TINYINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.PackageGoodsExample" resultType="java.lang.Integer" >
+    select count(*) from package_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update package_goods
+    <set >
+      <if test="record.packageId != null" >
+        package_id = #{record.packageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=TINYINT},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsNumber != null" >
+        goods_number = #{record.goodsNumber,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update package_goods
+    set package_id = #{record.packageId,jdbcType=INTEGER},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      admin_id = #{record.adminId,jdbcType=TINYINT},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      goods_number = #{record.goodsNumber,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.PackageGoods" >
+    update package_goods
+    <set >
+      <if test="goodsNumber != null" >
+        goods_number = #{goodsNumber,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where package_id = #{packageId,jdbcType=INTEGER}
+      and goods_id = #{goodsId,jdbcType=INTEGER}
+      and admin_id = #{adminId,jdbcType=TINYINT}
+      and product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.PackageGoods" >
+    update package_goods
+    set goods_number = #{goodsNumber,jdbcType=SMALLINT}
+    where package_id = #{packageId,jdbcType=INTEGER}
+      and goods_id = #{goodsId,jdbcType=INTEGER}
+      and admin_id = #{adminId,jdbcType=TINYINT}
+      and product_id = #{productId,jdbcType=INTEGER}
+  </update>
+</mapper>

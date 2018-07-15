@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peacock.shop.web.mapper.VoteOptionMapper" >
+  <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.VoteOption" >
+    <constructor >
+      <idArg column="option_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="vote_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="option_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="option_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="option_order" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    option_id, vote_id, option_name, option_count, option_order
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.peacock.shop.web.domain.VoteOptionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from vote_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from vote_option
+    where option_id = #{optionId,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from vote_option
+    where option_id = #{optionId,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.peacock.shop.web.domain.VoteOptionExample" >
+    delete from vote_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peacock.shop.web.domain.VoteOption" >
+    insert into vote_option (option_id, vote_id, option_name, 
+      option_count, option_order)
+    values (#{optionId,jdbcType=SMALLINT}, #{voteId,jdbcType=SMALLINT}, #{optionName,jdbcType=VARCHAR}, 
+      #{optionCount,jdbcType=INTEGER}, #{optionOrder,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.VoteOption" >
+    insert into vote_option
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="optionId != null" >
+        option_id,
+      </if>
+      <if test="voteId != null" >
+        vote_id,
+      </if>
+      <if test="optionName != null" >
+        option_name,
+      </if>
+      <if test="optionCount != null" >
+        option_count,
+      </if>
+      <if test="optionOrder != null" >
+        option_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="optionId != null" >
+        #{optionId,jdbcType=SMALLINT},
+      </if>
+      <if test="voteId != null" >
+        #{voteId,jdbcType=SMALLINT},
+      </if>
+      <if test="optionName != null" >
+        #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="optionCount != null" >
+        #{optionCount,jdbcType=INTEGER},
+      </if>
+      <if test="optionOrder != null" >
+        #{optionOrder,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peacock.shop.web.domain.VoteOptionExample" resultType="java.lang.Integer" >
+    select count(*) from vote_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vote_option
+    <set >
+      <if test="record.optionId != null" >
+        option_id = #{record.optionId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.voteId != null" >
+        vote_id = #{record.voteId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.optionName != null" >
+        option_name = #{record.optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionCount != null" >
+        option_count = #{record.optionCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.optionOrder != null" >
+        option_order = #{record.optionOrder,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vote_option
+    set option_id = #{record.optionId,jdbcType=SMALLINT},
+      vote_id = #{record.voteId,jdbcType=SMALLINT},
+      option_name = #{record.optionName,jdbcType=VARCHAR},
+      option_count = #{record.optionCount,jdbcType=INTEGER},
+      option_order = #{record.optionOrder,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peacock.shop.web.domain.VoteOption" >
+    update vote_option
+    <set >
+      <if test="voteId != null" >
+        vote_id = #{voteId,jdbcType=SMALLINT},
+      </if>
+      <if test="optionName != null" >
+        option_name = #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="optionCount != null" >
+        option_count = #{optionCount,jdbcType=INTEGER},
+      </if>
+      <if test="optionOrder != null" >
+        option_order = #{optionOrder,jdbcType=TINYINT},
+      </if>
+    </set>
+    where option_id = #{optionId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.VoteOption" >
+    update vote_option
+    set vote_id = #{voteId,jdbcType=SMALLINT},
+      option_name = #{optionName,jdbcType=VARCHAR},
+      option_count = #{optionCount,jdbcType=INTEGER},
+      option_order = #{optionOrder,jdbcType=TINYINT}
+    where option_id = #{optionId,jdbcType=SMALLINT}
+  </update>
+</mapper>
