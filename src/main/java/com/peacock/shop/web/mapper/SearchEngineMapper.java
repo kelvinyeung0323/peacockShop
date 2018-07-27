@@ -4,8 +4,10 @@ import com.peacock.shop.web.domain.SearchEngine;
 import com.peacock.shop.web.domain.SearchEngineExample;
 import com.peacock.shop.web.domain.SearchEngineKey;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface SearchEngineMapper {
     int countByExample(SearchEngineExample example);
 

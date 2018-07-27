@@ -32,6 +32,7 @@
                            <#--</#if>-->
                          ><@spring.message "index.home"/>
                         </a></li>
+                    <@navigationsDirectiveModel>
                     <#list pageHeaderNavs as nav>
                     <#if pageHeaderNavs?size == nav_index>
                     <li><a href="${nav.url!}"
@@ -47,6 +48,7 @@
                     <#--<#if nav.active == 1>-->
                     <#--</#if>-->
                     </#list>
+                    </@navigationsDirectiveModel>
                 </ul>
             </div>
         </div>

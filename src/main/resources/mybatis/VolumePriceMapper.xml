@@ -3,7 +3,7 @@
 <mapper namespace="com.peacock.shop.web.mapper.VolumePriceMapper" >
   <resultMap id="BaseResultMap" type="com.peacock.shop.web.domain.VolumePrice" >
     <constructor >
-      <idArg column="price_type" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <idArg column="price_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
       <idArg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <idArg column="volume_number" jdbcType="SMALLINT" javaType="java.lang.Short" />
       <arg column="volume_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -89,13 +89,13 @@
     select 
     <include refid="Base_Column_List" />
     from volume_price
-    where price_type = #{priceType,jdbcType=BIT}
+    where price_type = #{priceType,jdbcType=TINYINT}
       and goods_id = #{goodsId,jdbcType=INTEGER}
       and volume_number = #{volumeNumber,jdbcType=SMALLINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.peacock.shop.web.domain.VolumePriceKey" >
     delete from volume_price
-    where price_type = #{priceType,jdbcType=BIT}
+    where price_type = #{priceType,jdbcType=TINYINT}
       and goods_id = #{goodsId,jdbcType=INTEGER}
       and volume_number = #{volumeNumber,jdbcType=SMALLINT}
   </delete>
@@ -108,7 +108,7 @@
   <insert id="insert" parameterType="com.peacock.shop.web.domain.VolumePrice" >
     insert into volume_price (price_type, goods_id, volume_number, 
       volume_price)
-    values (#{priceType,jdbcType=BIT}, #{goodsId,jdbcType=INTEGER}, #{volumeNumber,jdbcType=SMALLINT}, 
+    values (#{priceType,jdbcType=TINYINT}, #{goodsId,jdbcType=INTEGER}, #{volumeNumber,jdbcType=SMALLINT}, 
       #{volumePrice,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.VolumePrice" >
@@ -129,7 +129,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="priceType != null" >
-        #{priceType,jdbcType=BIT},
+        #{priceType,jdbcType=TINYINT},
       </if>
       <if test="goodsId != null" >
         #{goodsId,jdbcType=INTEGER},
@@ -152,7 +152,7 @@
     update volume_price
     <set >
       <if test="record.priceType != null" >
-        price_type = #{record.priceType,jdbcType=BIT},
+        price_type = #{record.priceType,jdbcType=TINYINT},
       </if>
       <if test="record.goodsId != null" >
         goods_id = #{record.goodsId,jdbcType=INTEGER},
@@ -170,7 +170,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update volume_price
-    set price_type = #{record.priceType,jdbcType=BIT},
+    set price_type = #{record.priceType,jdbcType=TINYINT},
       goods_id = #{record.goodsId,jdbcType=INTEGER},
       volume_number = #{record.volumeNumber,jdbcType=SMALLINT},
       volume_price = #{record.volumePrice,jdbcType=DECIMAL}
@@ -185,14 +185,14 @@
         volume_price = #{volumePrice,jdbcType=DECIMAL},
       </if>
     </set>
-    where price_type = #{priceType,jdbcType=BIT}
+    where price_type = #{priceType,jdbcType=TINYINT}
       and goods_id = #{goodsId,jdbcType=INTEGER}
       and volume_number = #{volumeNumber,jdbcType=SMALLINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.peacock.shop.web.domain.VolumePrice" >
     update volume_price
     set volume_price = #{volumePrice,jdbcType=DECIMAL}
-    where price_type = #{priceType,jdbcType=BIT}
+    where price_type = #{priceType,jdbcType=TINYINT}
       and goods_id = #{goodsId,jdbcType=INTEGER}
       and volume_number = #{volumeNumber,jdbcType=SMALLINT}
   </update>

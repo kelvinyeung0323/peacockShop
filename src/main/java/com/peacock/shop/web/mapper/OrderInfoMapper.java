@@ -2,9 +2,12 @@ package com.peacock.shop.web.mapper;
 
 import com.peacock.shop.web.domain.OrderInfo;
 import com.peacock.shop.web.domain.OrderInfoExample;
-import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
+@Mapper
 public interface OrderInfoMapper {
     int countByExample(OrderInfoExample example);
 

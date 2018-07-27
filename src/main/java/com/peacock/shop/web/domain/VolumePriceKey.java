@@ -1,13 +1,13 @@
 package com.peacock.shop.web.domain;
 
 public class VolumePriceKey {
-    private Boolean priceType;
+    private Byte priceType;
 
     private Integer goodsId;
 
     private Short volumeNumber;
 
-    public VolumePriceKey(Boolean priceType, Integer goodsId, Short volumeNumber) {
+    public VolumePriceKey(Byte priceType, Integer goodsId, Short volumeNumber) {
         this.priceType = priceType;
         this.goodsId = goodsId;
         this.volumeNumber = volumeNumber;
@@ -17,11 +17,11 @@ public class VolumePriceKey {
         super();
     }
 
-    public Boolean getPriceType() {
+    public Byte getPriceType() {
         return priceType;
     }
 
-    public void setPriceType(Boolean priceType) {
+    public void setPriceType(Byte priceType) {
         this.priceType = priceType;
     }
 

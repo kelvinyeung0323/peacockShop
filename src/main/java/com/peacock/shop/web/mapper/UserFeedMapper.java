@@ -3,8 +3,10 @@ package com.peacock.shop.web.mapper;
 import com.peacock.shop.web.domain.UserFeed;
 import com.peacock.shop.web.domain.UserFeedExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface UserFeedMapper {
     int countByExample(UserFeedExample example);
 

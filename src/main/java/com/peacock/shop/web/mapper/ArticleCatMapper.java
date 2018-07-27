@@ -3,8 +3,10 @@ package com.peacock.shop.web.mapper;
 import com.peacock.shop.web.domain.ArticleCat;
 import com.peacock.shop.web.domain.ArticleCatExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ArticleCatMapper {
     int countByExample(ArticleCatExample example);
 

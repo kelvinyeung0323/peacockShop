@@ -7,21 +7,21 @@ public class Attribute {
 
     private String attrName;
 
-    private Boolean attrInputType;
+    private Byte attrInputType;
 
-    private Boolean attrType;
+    private Byte attrType;
 
-    private Boolean attrIndex;
+    private Byte attrIndex;
 
     private Byte sortOrder;
 
-    private Boolean isLinked;
+    private Byte isLinked;
 
-    private Boolean attrGroup;
+    private Byte attrGroup;
 
     private String attrValues;
 
-    public Attribute(Short attrId, Short catId, String attrName, Boolean attrInputType, Boolean attrType, Boolean attrIndex, Byte sortOrder, Boolean isLinked, Boolean attrGroup, String attrValues) {
+    public Attribute(Short attrId, Short catId, String attrName, Byte attrInputType, Byte attrType, Byte attrIndex, Byte sortOrder, Byte isLinked, Byte attrGroup, String attrValues) {
         this.attrId = attrId;
         this.catId = catId;
         this.attrName = attrName;
@@ -62,27 +62,27 @@ public class Attribute {
         this.attrName = attrName == null ? null : attrName.trim();
     }
 
-    public Boolean getAttrInputType() {
+    public Byte getAttrInputType() {
         return attrInputType;
     }
 
-    public void setAttrInputType(Boolean attrInputType) {
+    public void setAttrInputType(Byte attrInputType) {
         this.attrInputType = attrInputType;
     }
 
-    public Boolean getAttrType() {
+    public Byte getAttrType() {
         return attrType;
     }
 
-    public void setAttrType(Boolean attrType) {
+    public void setAttrType(Byte attrType) {
         this.attrType = attrType;
     }
 
-    public Boolean getAttrIndex() {
+    public Byte getAttrIndex() {
         return attrIndex;
     }
 
-    public void setAttrIndex(Boolean attrIndex) {
+    public void setAttrIndex(Byte attrIndex) {
         this.attrIndex = attrIndex;
     }
 
@@ -94,19 +94,19 @@ public class Attribute {
         this.sortOrder = sortOrder;
     }
 
-    public Boolean getIsLinked() {
+    public Byte getIsLinked() {
         return isLinked;
     }
 
-    public void setIsLinked(Boolean isLinked) {
+    public void setIsLinked(Byte isLinked) {
         this.isLinked = isLinked;
     }
 
-    public Boolean getAttrGroup() {
+    public Byte getAttrGroup() {
         return attrGroup;
     }
 
-    public void setAttrGroup(Boolean attrGroup) {
+    public void setAttrGroup(Byte attrGroup) {
         this.attrGroup = attrGroup;
     }
 

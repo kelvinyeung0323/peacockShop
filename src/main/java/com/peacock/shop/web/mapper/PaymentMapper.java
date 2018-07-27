@@ -4,8 +4,10 @@ import com.peacock.shop.web.domain.Payment;
 import com.peacock.shop.web.domain.PaymentExample;
 import com.peacock.shop.web.domain.PaymentWithBLOBs;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface PaymentMapper {
     int countByExample(PaymentExample example);
 

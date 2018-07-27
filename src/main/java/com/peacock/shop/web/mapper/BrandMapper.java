@@ -3,8 +3,12 @@ package com.peacock.shop.web.mapper;
 import com.peacock.shop.web.domain.Brand;
 import com.peacock.shop.web.domain.BrandExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+
+@Mapper
 public interface BrandMapper {
     int countByExample(BrandExample example);
 

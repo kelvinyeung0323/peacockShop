@@ -3,8 +3,10 @@ package com.peacock.shop.web.mapper;
 import com.peacock.shop.web.domain.Device;
 import com.peacock.shop.web.domain.DeviceExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface DeviceMapper {
     int countByExample(DeviceExample example);
 

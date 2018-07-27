@@ -3,8 +3,10 @@ package com.peacock.shop.web.mapper;
 import com.peacock.shop.web.domain.AreaRegionExample;
 import com.peacock.shop.web.domain.AreaRegionKey;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface AreaRegionMapper {
     int countByExample(AreaRegionExample example);
 

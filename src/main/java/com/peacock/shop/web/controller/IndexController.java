@@ -34,9 +34,6 @@ public class IndexController {
         //TODO:用户信息
         //model.addAttribute("", );
         //TODO:购物车信息
-        //中间导航
-        List<Nav> pageHeaderNavs =navigationService.getPageHederNavigations();
-        model.addAttribute("pageHeaderNavs",pageHeaderNavs);
 
         //类目树
         List<Category> categories = categoryService.getCategoryTreeByParentId((short) 0);

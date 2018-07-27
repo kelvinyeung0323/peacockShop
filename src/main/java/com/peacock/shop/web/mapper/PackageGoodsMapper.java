@@ -4,8 +4,10 @@ import com.peacock.shop.web.domain.PackageGoods;
 import com.peacock.shop.web.domain.PackageGoodsExample;
 import com.peacock.shop.web.domain.PackageGoodsKey;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface PackageGoodsMapper {
     int countByExample(PackageGoodsExample example);
 

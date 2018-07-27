@@ -4,8 +4,10 @@ import com.peacock.shop.web.domain.Shipping;
 import com.peacock.shop.web.domain.ShippingExample;
 import com.peacock.shop.web.domain.ShippingWithBLOBs;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ShippingMapper {
     int countByExample(ShippingExample example);
 

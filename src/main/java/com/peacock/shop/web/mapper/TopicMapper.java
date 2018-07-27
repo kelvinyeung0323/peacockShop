@@ -4,8 +4,10 @@ import com.peacock.shop.web.domain.Topic;
 import com.peacock.shop.web.domain.TopicExample;
 import com.peacock.shop.web.domain.TopicWithBLOBs;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface TopicMapper {
     int countByExample(TopicExample example);
 

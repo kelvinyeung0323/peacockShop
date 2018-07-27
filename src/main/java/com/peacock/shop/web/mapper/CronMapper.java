@@ -4,8 +4,10 @@ import com.peacock.shop.web.domain.Cron;
 import com.peacock.shop.web.domain.CronExample;
 import com.peacock.shop.web.domain.CronWithBLOBs;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface CronMapper {
     int countByExample(CronExample example);
 

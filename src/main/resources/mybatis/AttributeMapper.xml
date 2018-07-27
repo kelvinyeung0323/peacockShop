@@ -6,12 +6,12 @@
       <idArg column="attr_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
       <arg column="cat_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
       <arg column="attr_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="attr_input_type" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="attr_type" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="attr_index" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="attr_input_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="attr_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="attr_index" jdbcType="TINYINT" javaType="java.lang.Byte" />
       <arg column="sort_order" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="is_linked" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="attr_group" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="is_linked" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="attr_group" jdbcType="TINYINT" javaType="java.lang.Byte" />
     </constructor>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.peacock.shop.web.domain.Attribute" >
@@ -19,12 +19,12 @@
       <idArg column="attr_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
       <arg column="cat_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
       <arg column="attr_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="attr_input_type" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="attr_type" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="attr_index" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="attr_input_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="attr_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="attr_index" jdbcType="TINYINT" javaType="java.lang.Byte" />
       <arg column="sort_order" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="is_linked" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="attr_group" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="is_linked" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="attr_group" jdbcType="TINYINT" javaType="java.lang.Byte" />
       <arg column="attr_values" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
@@ -149,8 +149,8 @@
       sort_order, is_linked, attr_group, 
       attr_values)
     values (#{attrId,jdbcType=SMALLINT}, #{catId,jdbcType=SMALLINT}, #{attrName,jdbcType=VARCHAR}, 
-      #{attrInputType,jdbcType=BIT}, #{attrType,jdbcType=BIT}, #{attrIndex,jdbcType=BIT}, 
-      #{sortOrder,jdbcType=TINYINT}, #{isLinked,jdbcType=BIT}, #{attrGroup,jdbcType=BIT}, 
+      #{attrInputType,jdbcType=TINYINT}, #{attrType,jdbcType=TINYINT}, #{attrIndex,jdbcType=TINYINT}, 
+      #{sortOrder,jdbcType=TINYINT}, #{isLinked,jdbcType=TINYINT}, #{attrGroup,jdbcType=TINYINT}, 
       #{attrValues,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.Attribute" >
@@ -198,22 +198,22 @@
         #{attrName,jdbcType=VARCHAR},
       </if>
       <if test="attrInputType != null" >
-        #{attrInputType,jdbcType=BIT},
+        #{attrInputType,jdbcType=TINYINT},
       </if>
       <if test="attrType != null" >
-        #{attrType,jdbcType=BIT},
+        #{attrType,jdbcType=TINYINT},
       </if>
       <if test="attrIndex != null" >
-        #{attrIndex,jdbcType=BIT},
+        #{attrIndex,jdbcType=TINYINT},
       </if>
       <if test="sortOrder != null" >
         #{sortOrder,jdbcType=TINYINT},
       </if>
       <if test="isLinked != null" >
-        #{isLinked,jdbcType=BIT},
+        #{isLinked,jdbcType=TINYINT},
       </if>
       <if test="attrGroup != null" >
-        #{attrGroup,jdbcType=BIT},
+        #{attrGroup,jdbcType=TINYINT},
       </if>
       <if test="attrValues != null" >
         #{attrValues,jdbcType=LONGVARCHAR},
@@ -239,22 +239,22 @@
         attr_name = #{record.attrName,jdbcType=VARCHAR},
       </if>
       <if test="record.attrInputType != null" >
-        attr_input_type = #{record.attrInputType,jdbcType=BIT},
+        attr_input_type = #{record.attrInputType,jdbcType=TINYINT},
       </if>
       <if test="record.attrType != null" >
-        attr_type = #{record.attrType,jdbcType=BIT},
+        attr_type = #{record.attrType,jdbcType=TINYINT},
       </if>
       <if test="record.attrIndex != null" >
-        attr_index = #{record.attrIndex,jdbcType=BIT},
+        attr_index = #{record.attrIndex,jdbcType=TINYINT},
       </if>
       <if test="record.sortOrder != null" >
         sort_order = #{record.sortOrder,jdbcType=TINYINT},
       </if>
       <if test="record.isLinked != null" >
-        is_linked = #{record.isLinked,jdbcType=BIT},
+        is_linked = #{record.isLinked,jdbcType=TINYINT},
       </if>
       <if test="record.attrGroup != null" >
-        attr_group = #{record.attrGroup,jdbcType=BIT},
+        attr_group = #{record.attrGroup,jdbcType=TINYINT},
       </if>
       <if test="record.attrValues != null" >
         attr_values = #{record.attrValues,jdbcType=LONGVARCHAR},
@@ -269,12 +269,12 @@
     set attr_id = #{record.attrId,jdbcType=SMALLINT},
       cat_id = #{record.catId,jdbcType=SMALLINT},
       attr_name = #{record.attrName,jdbcType=VARCHAR},
-      attr_input_type = #{record.attrInputType,jdbcType=BIT},
-      attr_type = #{record.attrType,jdbcType=BIT},
-      attr_index = #{record.attrIndex,jdbcType=BIT},
+      attr_input_type = #{record.attrInputType,jdbcType=TINYINT},
+      attr_type = #{record.attrType,jdbcType=TINYINT},
+      attr_index = #{record.attrIndex,jdbcType=TINYINT},
       sort_order = #{record.sortOrder,jdbcType=TINYINT},
-      is_linked = #{record.isLinked,jdbcType=BIT},
-      attr_group = #{record.attrGroup,jdbcType=BIT},
+      is_linked = #{record.isLinked,jdbcType=TINYINT},
+      attr_group = #{record.attrGroup,jdbcType=TINYINT},
       attr_values = #{record.attrValues,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -285,12 +285,12 @@
     set attr_id = #{record.attrId,jdbcType=SMALLINT},
       cat_id = #{record.catId,jdbcType=SMALLINT},
       attr_name = #{record.attrName,jdbcType=VARCHAR},
-      attr_input_type = #{record.attrInputType,jdbcType=BIT},
-      attr_type = #{record.attrType,jdbcType=BIT},
-      attr_index = #{record.attrIndex,jdbcType=BIT},
+      attr_input_type = #{record.attrInputType,jdbcType=TINYINT},
+      attr_type = #{record.attrType,jdbcType=TINYINT},
+      attr_index = #{record.attrIndex,jdbcType=TINYINT},
       sort_order = #{record.sortOrder,jdbcType=TINYINT},
-      is_linked = #{record.isLinked,jdbcType=BIT},
-      attr_group = #{record.attrGroup,jdbcType=BIT}
+      is_linked = #{record.isLinked,jdbcType=TINYINT},
+      attr_group = #{record.attrGroup,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -305,22 +305,22 @@
         attr_name = #{attrName,jdbcType=VARCHAR},
       </if>
       <if test="attrInputType != null" >
-        attr_input_type = #{attrInputType,jdbcType=BIT},
+        attr_input_type = #{attrInputType,jdbcType=TINYINT},
       </if>
       <if test="attrType != null" >
-        attr_type = #{attrType,jdbcType=BIT},
+        attr_type = #{attrType,jdbcType=TINYINT},
       </if>
       <if test="attrIndex != null" >
-        attr_index = #{attrIndex,jdbcType=BIT},
+        attr_index = #{attrIndex,jdbcType=TINYINT},
       </if>
       <if test="sortOrder != null" >
         sort_order = #{sortOrder,jdbcType=TINYINT},
       </if>
       <if test="isLinked != null" >
-        is_linked = #{isLinked,jdbcType=BIT},
+        is_linked = #{isLinked,jdbcType=TINYINT},
       </if>
       <if test="attrGroup != null" >
-        attr_group = #{attrGroup,jdbcType=BIT},
+        attr_group = #{attrGroup,jdbcType=TINYINT},
       </if>
       <if test="attrValues != null" >
         attr_values = #{attrValues,jdbcType=LONGVARCHAR},
@@ -332,12 +332,12 @@
     update attribute
     set cat_id = #{catId,jdbcType=SMALLINT},
       attr_name = #{attrName,jdbcType=VARCHAR},
-      attr_input_type = #{attrInputType,jdbcType=BIT},
-      attr_type = #{attrType,jdbcType=BIT},
-      attr_index = #{attrIndex,jdbcType=BIT},
+      attr_input_type = #{attrInputType,jdbcType=TINYINT},
+      attr_type = #{attrType,jdbcType=TINYINT},
+      attr_index = #{attrIndex,jdbcType=TINYINT},
       sort_order = #{sortOrder,jdbcType=TINYINT},
-      is_linked = #{isLinked,jdbcType=BIT},
-      attr_group = #{attrGroup,jdbcType=BIT},
+      is_linked = #{isLinked,jdbcType=TINYINT},
+      attr_group = #{attrGroup,jdbcType=TINYINT},
       attr_values = #{attrValues,jdbcType=LONGVARCHAR}
     where attr_id = #{attrId,jdbcType=SMALLINT}
   </update>
@@ -345,12 +345,12 @@
     update attribute
     set cat_id = #{catId,jdbcType=SMALLINT},
       attr_name = #{attrName,jdbcType=VARCHAR},
-      attr_input_type = #{attrInputType,jdbcType=BIT},
-      attr_type = #{attrType,jdbcType=BIT},
-      attr_index = #{attrIndex,jdbcType=BIT},
+      attr_input_type = #{attrInputType,jdbcType=TINYINT},
+      attr_type = #{attrType,jdbcType=TINYINT},
+      attr_index = #{attrIndex,jdbcType=TINYINT},
       sort_order = #{sortOrder,jdbcType=TINYINT},
-      is_linked = #{isLinked,jdbcType=BIT},
-      attr_group = #{attrGroup,jdbcType=BIT}
+      is_linked = #{isLinked,jdbcType=TINYINT},
+      attr_group = #{attrGroup,jdbcType=TINYINT}
     where attr_id = #{attrId,jdbcType=SMALLINT}
   </update>
 </mapper>

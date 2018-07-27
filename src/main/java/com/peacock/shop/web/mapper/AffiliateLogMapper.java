@@ -3,8 +3,10 @@ package com.peacock.shop.web.mapper;
 import com.peacock.shop.web.domain.AffiliateLog;
 import com.peacock.shop.web.domain.AffiliateLogExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface AffiliateLogMapper {
     int countByExample(AffiliateLogExample example);
 

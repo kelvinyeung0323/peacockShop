@@ -2,10 +2,11 @@ package com.peacock.shop.web.mapper;
 
 import com.peacock.shop.web.domain.Comment;
 import com.peacock.shop.web.domain.CommentExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
+@Mapper
 public interface CommentMapper {
     int countByExample(CommentExample example);
 

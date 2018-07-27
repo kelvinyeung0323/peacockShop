@@ -3,8 +3,10 @@ package com.peacock.shop.web.mapper;
 import com.peacock.shop.web.domain.CatRecommendExample;
 import com.peacock.shop.web.domain.CatRecommendKey;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface CatRecommendMapper {
     int countByExample(CatRecommendExample example);
 

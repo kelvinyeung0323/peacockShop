@@ -94,7 +94,7 @@
 
                     <div class="all_ms">
                         <#list secondFloorGoods as goods >
-                        <a class="goodsItem" href="${goods.url!}"> <div  class="img-box"><img src="/public/${goods.goodsThumb!}" alt="${goods.goodsName?html}" class="goodsimg" /></div>
+                        <a class="goodsItem" href="goods?id=${goods.goodsId!}"> <div  class="img-box"><img src="/public/${goods.goodsThumb!}" alt="${goods.goodsName?html}" class="goodsimg" /></div>
                             <div class="goods-brief"><@peacock.substring goods.goodsBrief 0 20 /></div>
                             <div class="gos-title">${goods.goodsSn?html}</div>
                             <div class="prices">
@@ -123,7 +123,7 @@
                     <#--<#include "common/cat_goods.ftl"/>-->
                     <div class="all_ms">
                         <#list thirdFloorGoods as goods>
-                        <a class="goodsItem" href="${goodsurl!}"> <div  class="img-box"><img src="/public/${goods.goodsThumb!}" alt="${goods.goodsName?html}" class="goodsimg" /></div>
+                        <a class="goodsItem" href="goods?id=${goods.goodsId!}"> <div  class="img-box"><img src="/public/${goods.goodsThumb!}" alt="${goods.goodsName?html}" class="goodsimg" /></div>
                             <div class="goods-brief"><@peacock.substring goods.goodsBrief 0 20 /></div>
                             <div class="gos-title">${goods.goodsSn!?html}</div>
                             <div class="prices">
@@ -153,7 +153,7 @@
                 <div id="show_hot_area" class="clearfix goodsBox all_mid all_ms">
                 </#if>
                     <#list hotSaleGoods as goods>
-                    <a class="goodsItem" href="${goods.url!}"> <div  class="img-box"><img src="/public/${goods.goodsThumb!}" alt="${goods.goodsName?html}" class="goodsimg" /></div>
+                    <a class="goodsItem" href="goods?id=${goods.goodsId!}"> <div  class="img-box"><img src="/public/${goods.goodsThumb!}" alt="${goods.goodsName?html}" class="goodsimg" /></div>
                         <div class="goods-brief"><@peacock.substring goods.goodsBrief 0 20 /></div>
                         <div class="gos-title">${goods.goodsSn?html}</div>
                         <div class="prices">

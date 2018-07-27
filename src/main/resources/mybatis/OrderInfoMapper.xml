@@ -6,9 +6,9 @@
       <idArg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="order_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_status" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="shipping_status" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="pay_status" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="order_status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="shipping_status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="pay_status" jdbcType="TINYINT" javaType="java.lang.Byte" />
       <arg column="consignee" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="country" jdbcType="SMALLINT" javaType="java.lang.Short" />
       <arg column="province" jdbcType="SMALLINT" javaType="java.lang.Short" />
@@ -63,7 +63,7 @@
       <arg column="agency_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
       <arg column="inv_type" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="tax" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="is_separate" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="is_separate" jdbcType="TINYINT" javaType="java.lang.Byte" />
       <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="discount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="callback_status" jdbcType="CHAR" javaType="java.lang.String" />
@@ -194,7 +194,7 @@
       is_separate, parent_id, discount, 
       callback_status, lastmodify)
     values (#{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{orderStatus,jdbcType=BIT}, #{shippingStatus,jdbcType=BIT}, #{payStatus,jdbcType=BIT}, 
+      #{orderStatus,jdbcType=TINYINT}, #{shippingStatus,jdbcType=TINYINT}, #{payStatus,jdbcType=TINYINT}, 
       #{consignee,jdbcType=VARCHAR}, #{country,jdbcType=SMALLINT}, #{province,jdbcType=SMALLINT}, 
       #{city,jdbcType=SMALLINT}, #{district,jdbcType=SMALLINT}, #{address,jdbcType=VARCHAR}, 
       #{zipcode,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
@@ -213,7 +213,7 @@
       #{bonusId,jdbcType=INTEGER}, #{invoiceNo,jdbcType=VARCHAR}, #{extensionCode,jdbcType=VARCHAR}, 
       #{extensionId,jdbcType=INTEGER}, #{toBuyer,jdbcType=VARCHAR}, #{payNote,jdbcType=VARCHAR}, 
       #{agencyId,jdbcType=SMALLINT}, #{invType,jdbcType=VARCHAR}, #{tax,jdbcType=DECIMAL}, 
-      #{isSeparate,jdbcType=BIT}, #{parentId,jdbcType=INTEGER}, #{discount,jdbcType=DECIMAL}, 
+      #{isSeparate,jdbcType=TINYINT}, #{parentId,jdbcType=INTEGER}, #{discount,jdbcType=DECIMAL}, 
       #{callbackStatus,jdbcType=CHAR}, #{lastmodify,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.peacock.shop.web.domain.OrderInfo" >
@@ -426,13 +426,13 @@
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="orderStatus != null" >
-        #{orderStatus,jdbcType=BIT},
+        #{orderStatus,jdbcType=TINYINT},
       </if>
       <if test="shippingStatus != null" >
-        #{shippingStatus,jdbcType=BIT},
+        #{shippingStatus,jdbcType=TINYINT},
       </if>
       <if test="payStatus != null" >
-        #{payStatus,jdbcType=BIT},
+        #{payStatus,jdbcType=TINYINT},
       </if>
       <if test="consignee != null" >
         #{consignee,jdbcType=VARCHAR},
@@ -597,7 +597,7 @@
         #{tax,jdbcType=DECIMAL},
       </if>
       <if test="isSeparate != null" >
-        #{isSeparate,jdbcType=BIT},
+        #{isSeparate,jdbcType=TINYINT},
       </if>
       <if test="parentId != null" >
         #{parentId,jdbcType=INTEGER},
@@ -632,13 +632,13 @@
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.orderStatus != null" >
-        order_status = #{record.orderStatus,jdbcType=BIT},
+        order_status = #{record.orderStatus,jdbcType=TINYINT},
       </if>
       <if test="record.shippingStatus != null" >
-        shipping_status = #{record.shippingStatus,jdbcType=BIT},
+        shipping_status = #{record.shippingStatus,jdbcType=TINYINT},
       </if>
       <if test="record.payStatus != null" >
-        pay_status = #{record.payStatus,jdbcType=BIT},
+        pay_status = #{record.payStatus,jdbcType=TINYINT},
       </if>
       <if test="record.consignee != null" >
         consignee = #{record.consignee,jdbcType=VARCHAR},
@@ -803,7 +803,7 @@
         tax = #{record.tax,jdbcType=DECIMAL},
       </if>
       <if test="record.isSeparate != null" >
-        is_separate = #{record.isSeparate,jdbcType=BIT},
+        is_separate = #{record.isSeparate,jdbcType=TINYINT},
       </if>
       <if test="record.parentId != null" >
         parent_id = #{record.parentId,jdbcType=INTEGER},
@@ -827,9 +827,9 @@
     set order_id = #{record.orderId,jdbcType=INTEGER},
       order_sn = #{record.orderSn,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=INTEGER},
-      order_status = #{record.orderStatus,jdbcType=BIT},
-      shipping_status = #{record.shippingStatus,jdbcType=BIT},
-      pay_status = #{record.payStatus,jdbcType=BIT},
+      order_status = #{record.orderStatus,jdbcType=TINYINT},
+      shipping_status = #{record.shippingStatus,jdbcType=TINYINT},
+      pay_status = #{record.payStatus,jdbcType=TINYINT},
       consignee = #{record.consignee,jdbcType=VARCHAR},
       country = #{record.country,jdbcType=SMALLINT},
       province = #{record.province,jdbcType=SMALLINT},
@@ -884,7 +884,7 @@
       agency_id = #{record.agencyId,jdbcType=SMALLINT},
       inv_type = #{record.invType,jdbcType=VARCHAR},
       tax = #{record.tax,jdbcType=DECIMAL},
-      is_separate = #{record.isSeparate,jdbcType=BIT},
+      is_separate = #{record.isSeparate,jdbcType=TINYINT},
       parent_id = #{record.parentId,jdbcType=INTEGER},
       discount = #{record.discount,jdbcType=DECIMAL},
       callback_status = #{record.callbackStatus,jdbcType=CHAR},
@@ -903,13 +903,13 @@
         user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="orderStatus != null" >
-        order_status = #{orderStatus,jdbcType=BIT},
+        order_status = #{orderStatus,jdbcType=TINYINT},
       </if>
       <if test="shippingStatus != null" >
-        shipping_status = #{shippingStatus,jdbcType=BIT},
+        shipping_status = #{shippingStatus,jdbcType=TINYINT},
       </if>
       <if test="payStatus != null" >
-        pay_status = #{payStatus,jdbcType=BIT},
+        pay_status = #{payStatus,jdbcType=TINYINT},
       </if>
       <if test="consignee != null" >
         consignee = #{consignee,jdbcType=VARCHAR},
@@ -1074,7 +1074,7 @@
         tax = #{tax,jdbcType=DECIMAL},
       </if>
       <if test="isSeparate != null" >
-        is_separate = #{isSeparate,jdbcType=BIT},
+        is_separate = #{isSeparate,jdbcType=TINYINT},
       </if>
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=INTEGER},
@@ -1095,9 +1095,9 @@
     update order_info
     set order_sn = #{orderSn,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
-      order_status = #{orderStatus,jdbcType=BIT},
-      shipping_status = #{shippingStatus,jdbcType=BIT},
-      pay_status = #{payStatus,jdbcType=BIT},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      shipping_status = #{shippingStatus,jdbcType=TINYINT},
+      pay_status = #{payStatus,jdbcType=TINYINT},
       consignee = #{consignee,jdbcType=VARCHAR},
       country = #{country,jdbcType=SMALLINT},
       province = #{province,jdbcType=SMALLINT},
@@ -1152,7 +1152,7 @@
       agency_id = #{agencyId,jdbcType=SMALLINT},
       inv_type = #{invType,jdbcType=VARCHAR},
       tax = #{tax,jdbcType=DECIMAL},
-      is_separate = #{isSeparate,jdbcType=BIT},
+      is_separate = #{isSeparate,jdbcType=TINYINT},
       parent_id = #{parentId,jdbcType=INTEGER},
       discount = #{discount,jdbcType=DECIMAL},
       callback_status = #{callbackStatus,jdbcType=CHAR},

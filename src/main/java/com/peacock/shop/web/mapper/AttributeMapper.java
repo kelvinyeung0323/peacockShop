@@ -2,8 +2,9 @@ package com.peacock.shop.web.mapper;
 
 import com.peacock.shop.web.domain.Attribute;
 import com.peacock.shop.web.domain.AttributeExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AttributeMapper {
     int countByExample(AttributeExample example);

@@ -4,8 +4,10 @@ import com.peacock.shop.web.domain.Coincidence;
 import com.peacock.shop.web.domain.CoincidenceExample;
 import com.peacock.shop.web.domain.CoincidenceKey;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface CoincidenceMapper {
     int countByExample(CoincidenceExample example);
 

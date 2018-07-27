@@ -9,11 +9,11 @@ public class OrderInfo {
 
     private Integer userId;
 
-    private Boolean orderStatus;
+    private Byte orderStatus;
 
-    private Boolean shippingStatus;
+    private Byte shippingStatus;
 
-    private Boolean payStatus;
+    private Byte payStatus;
 
     private String consignee;
 
@@ -123,7 +123,7 @@ public class OrderInfo {
 
     private BigDecimal tax;
 
-    private Boolean isSeparate;
+    private Byte isSeparate;
 
     private Integer parentId;
 
@@ -133,7 +133,7 @@ public class OrderInfo {
 
     private Integer lastmodify;
 
-    public OrderInfo(Integer orderId, String orderSn, Integer userId, Boolean orderStatus, Boolean shippingStatus, Boolean payStatus, String consignee, Short country, Short province, Short city, Short district, String address, String zipcode, String tel, String mobile, String email, String bestTime, String signBuilding, String postscript, Byte shippingId, String shippingName, Byte payId, String payName, String howOos, String howSurplus, String packName, String cardName, String cardMessage, String invPayee, String invContent, BigDecimal goodsAmount, BigDecimal shippingFee, BigDecimal insureFee, BigDecimal payFee, BigDecimal packFee, BigDecimal cardFee, BigDecimal goodsDiscountFee, BigDecimal moneyPaid, BigDecimal surplus, Integer integral, BigDecimal integralMoney, BigDecimal bonus, BigDecimal orderAmount, Short fromAd, String referer, Integer addTime, Integer confirmTime, Integer payTime, Integer shippingTime, Byte packId, Byte cardId, Integer bonusId, String invoiceNo, String extensionCode, Integer extensionId, String toBuyer, String payNote, Short agencyId, String invType, BigDecimal tax, Boolean isSeparate, Integer parentId, BigDecimal discount, String callbackStatus, Integer lastmodify) {
+    public OrderInfo(Integer orderId, String orderSn, Integer userId, Byte orderStatus, Byte shippingStatus, Byte payStatus, String consignee, Short country, Short province, Short city, Short district, String address, String zipcode, String tel, String mobile, String email, String bestTime, String signBuilding, String postscript, Byte shippingId, String shippingName, Byte payId, String payName, String howOos, String howSurplus, String packName, String cardName, String cardMessage, String invPayee, String invContent, BigDecimal goodsAmount, BigDecimal shippingFee, BigDecimal insureFee, BigDecimal payFee, BigDecimal packFee, BigDecimal cardFee, BigDecimal goodsDiscountFee, BigDecimal moneyPaid, BigDecimal surplus, Integer integral, BigDecimal integralMoney, BigDecimal bonus, BigDecimal orderAmount, Short fromAd, String referer, Integer addTime, Integer confirmTime, Integer payTime, Integer shippingTime, Byte packId, Byte cardId, Integer bonusId, String invoiceNo, String extensionCode, Integer extensionId, String toBuyer, String payNote, Short agencyId, String invType, BigDecimal tax, Byte isSeparate, Integer parentId, BigDecimal discount, String callbackStatus, Integer lastmodify) {
         this.orderId = orderId;
         this.orderSn = orderSn;
         this.userId = userId;
@@ -229,27 +229,27 @@ public class OrderInfo {
         this.userId = userId;
     }
 
-    public Boolean getOrderStatus() {
+    public Byte getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(Boolean orderStatus) {
+    public void setOrderStatus(Byte orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public Boolean getShippingStatus() {
+    public Byte getShippingStatus() {
         return shippingStatus;
     }
 
-    public void setShippingStatus(Boolean shippingStatus) {
+    public void setShippingStatus(Byte shippingStatus) {
         this.shippingStatus = shippingStatus;
     }
 
-    public Boolean getPayStatus() {
+    public Byte getPayStatus() {
         return payStatus;
     }
 
-    public void setPayStatus(Boolean payStatus) {
+    public void setPayStatus(Byte payStatus) {
         this.payStatus = payStatus;
     }
 
@@ -685,11 +685,11 @@ public class OrderInfo {
         this.tax = tax;
     }
 
-    public Boolean getIsSeparate() {
+    public Byte getIsSeparate() {
         return isSeparate;
     }
 
-    public void setIsSeparate(Boolean isSeparate) {
+    public void setIsSeparate(Byte isSeparate) {
         this.isSeparate = isSeparate;
     }
 

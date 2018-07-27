@@ -115,52 +115,52 @@ public class VolumePriceExample {
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeEqualTo(Boolean value) {
+        public Criteria andPriceTypeEqualTo(Byte value) {
             addCriterion("price_type =", value, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeNotEqualTo(Boolean value) {
+        public Criteria andPriceTypeNotEqualTo(Byte value) {
             addCriterion("price_type <>", value, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeGreaterThan(Boolean value) {
+        public Criteria andPriceTypeGreaterThan(Byte value) {
             addCriterion("price_type >", value, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andPriceTypeGreaterThanOrEqualTo(Byte value) {
             addCriterion("price_type >=", value, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeLessThan(Boolean value) {
+        public Criteria andPriceTypeLessThan(Byte value) {
             addCriterion("price_type <", value, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeLessThanOrEqualTo(Boolean value) {
+        public Criteria andPriceTypeLessThanOrEqualTo(Byte value) {
             addCriterion("price_type <=", value, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeIn(List<Boolean> values) {
+        public Criteria andPriceTypeIn(List<Byte> values) {
             addCriterion("price_type in", values, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeNotIn(List<Boolean> values) {
+        public Criteria andPriceTypeNotIn(List<Byte> values) {
             addCriterion("price_type not in", values, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeBetween(Boolean value1, Boolean value2) {
+        public Criteria andPriceTypeBetween(Byte value1, Byte value2) {
             addCriterion("price_type between", value1, value2, "priceType");
             return (Criteria) this;
         }
 
-        public Criteria andPriceTypeNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andPriceTypeNotBetween(Byte value1, Byte value2) {
             addCriterion("price_type not between", value1, value2, "priceType");
             return (Criteria) this;
         }

@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class VolumePrice extends VolumePriceKey {
     private BigDecimal volumePrice;
 
-    public VolumePrice(Boolean priceType, Integer goodsId, Short volumeNumber, BigDecimal volumePrice) {
+    public VolumePrice(Byte priceType, Integer goodsId, Short volumeNumber, BigDecimal volumePrice) {
         super(priceType, goodsId, volumeNumber);
         this.volumePrice = volumePrice;
     }

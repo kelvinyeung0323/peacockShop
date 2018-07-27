@@ -4,8 +4,10 @@ import com.peacock.shop.web.domain.Role;
 import com.peacock.shop.web.domain.RoleExample;
 import com.peacock.shop.web.domain.RoleWithBLOBs;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface RoleMapper {
     int countByExample(RoleExample example);
 
